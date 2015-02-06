@@ -5,8 +5,8 @@ Perl script which extracts the week menu plan of BHT Mensa Luxemburger Straße t
 All patsh are pointing to locations on our server.
 
 ### Requirements
-Perl 5
-Web::Scraper
-Encode
-JSON
-LOG::Log4perl
+- Perl 5
+- Web::Scraper
+- Encode
+- JSON
+- LOG::Log4perl
