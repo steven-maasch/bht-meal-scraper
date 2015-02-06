@@ -1,10 +1,10 @@
 # bht-meal-scraper
 Perl script which extracts the week menu plan of BHT Mensa Luxemburger Straße to json
 
-#Notice
+###Notice
 All patsh are pointing to locations on our server.
 
-# Requirements
+### Requirements
 Perl 5
 Web::Scraper
 Encode
