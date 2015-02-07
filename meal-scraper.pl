@@ -99,7 +99,7 @@ if (@{$res->{'dates'}} != $BUSINESS_DAYS) {
 my @week_meal_plan = ();
 
 my $num_dates = @{$res->{'dates'}};
-foreach my $i (0..$num_dates) {
+foreach my $i (0..$num_dates - 1) {
 	my $tmp = {};
 	$tmp->{'date'} = $res->{'dates'}[$i];
 	$tmp->{'specials'} = [ extract_meals('meals' => \@{${$res->{'specials'}}[$i]{'meals'}}) ];
