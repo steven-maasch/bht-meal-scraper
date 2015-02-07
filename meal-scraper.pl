@@ -90,7 +90,7 @@ my $day_dates = scraper {
 my $URL_WEEK_MENU = 'http://www.studentenwerk-berlin.de/print/mensen/speiseplan/beuth/woche.html';
 my $res = $day_dates->scrape(URI->new($URL_WEEK_MENU));
 
-# Monday ... Friday => 5 dates 
+# Monday ... Friday => 5 days
 my $BUSINESS_DAYS = 5;
 if (@{$res->{'dates'}} != $BUSINESS_DAYS) {
 	$LOGGER->error_die('Incorrect number of dates scraped. Expected 5 but was ' . scalar @{$res->{'dates'}});
