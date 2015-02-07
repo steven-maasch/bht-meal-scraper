@@ -17,7 +17,7 @@ my $LOGGER = Log::Log4perl->get_logger('meal-scraper');
 
 sub extract_meals {
 	my %args = @_;
-	my $meals = $args{meals};
+	my $meals = $args{'meals'};
 
 	my @tmp = ();
 	for (@{$meals}) {
@@ -30,10 +30,10 @@ sub extract_meals {
 		}
 
 		# Get meal name
-		$meal->{'meal_name'} = cleanup_name(dirty_name => $splitted[0]);
+		$meal->{'meal_name'} = cleanup_name('dirty_name' => $splitted[0]);
 
 		# Gxtract prices for meal
-		my %prices = extract_prices(prices => $splitted[1]);
+		my %prices = extract_prices('prices' => $splitted[1]);
 		$meal->{'price_student'} = $prices{'price_student'};
 		$meal->{'price_price_employee'} = $prices{'price_employee'};
 		$meal->{'price_guest'} = $prices{'price_guest'};
@@ -60,16 +60,16 @@ sub extract_prices {
 	}
 
 	return (
-		price_student => $extracted_prices[0],
-		price_employee => $extracted_prices[1],
-		price_guest => $extracted_prices[2]
+		'price_student' => $extracted_prices[0],
+		'price_employee' => $extracted_prices[1],
+		'price_guest' => $extracted_prices[2]
 	);
 }
 
 my $day_dates = scraper {
 	# scrap dates
 	process 'tr.mensa_week_head th.mensa_week_head_col',
-		'dates[]' => [ 'TEXT', qr/(\d{2}[.]\d{2}[.]\d{4})/sm ];
+		'dates[]' => [ 'TEXT', qr/(\d{2}[.]\d{2}[.]\d{4})/ms ];
 
 	# scrap specials
 	process 'td.special', 'specials[]' => scraper {
@@ -102,7 +102,7 @@ my $num_dates = @{$res->{'dates'}};
 foreach my $i (0..$num_dates) {
 	my $tmp = {};
 	$tmp->{'date'} = $res->{'dates'}[$i];
-	$tmp->{'specials'} = [ extract_meals(meals => \@{${$res->{'specials'}}[$i]{'meals'}}) ];
+	$tmp->{'specials'} = [ extract_meals('meals' => \@{${$res->{'specials'}}[$i]{'meals'}}) ];
 	$tmp->{'foods'} = [ extract_meals('meals' => \@{${$res->{'foods'}}[$i]{'meals'}}) ];
 	$tmp->{'side_dishes'} = [ extract_meals('meals' => \@{${$res->{'side_dishes'}}[$i]{'meals'}}) ];
 	push @week_meal_plan, $tmp;
